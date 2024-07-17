@@ -116,6 +116,7 @@ jobs:
           with:
             name: zap-report
             path: report_json.json
+
   build:
     needs: [test, sonarqube]
     runs-on: ubuntu-latest
@@ -135,9 +136,9 @@ jobs:
       -
          name: Build and push
          uses: docker/build-push-action@v5
-        with:
-         push: true
-         tags: ${{ secrets.DOCKERHUB_USERNAME }}/devops-labs:latest
+         with:
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/devops-labs:latest
 
   submit_results:
     needs: [build]
