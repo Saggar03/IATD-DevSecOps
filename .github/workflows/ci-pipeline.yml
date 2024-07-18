@@ -185,7 +185,7 @@ jobs:
               echo "All security gates passed"
 
   build:
-    needs: security_gate[]
+    needs: [security_gate]
     if: true
     permissions:
       id-token: write
@@ -219,7 +219,7 @@ jobs:
           IMAGE: ${{ secrets.DOCKERHUB_USERNAME }}/devops-labs:latest
         run: |
           cosign sign --yes ${IMAGE}
-          
+
   submit_results:
     needs: [test, sonarqube, dast, build]
     if: true
